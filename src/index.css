@@ -1,0 +1,11 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Inconsolata&display=swap');
+* {
+    font-family: "Inconsolata", sans-serif;
+}
+
+#logo-text {
+    font-family: 'Croissant One', cursive;
+}

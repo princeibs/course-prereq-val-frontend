@@ -21,6 +21,7 @@ const Login = () => {
       setLoading(true)
       try {
             const res = await axios.post(`${baseUrl}/auth/login`, {email_or_matric: emailOrMatric, password});
+            console.log("res: ", res)
             if (res.data.statusCode == 200) {
                 setCookies("access_token", res.data.data.token);
                 setCookies('role', res.data.data.role)

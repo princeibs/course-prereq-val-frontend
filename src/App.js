@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { baseUrl } from "./helpers/config";
 import Loader from "./components/Loader";
+import { RegisterCourse, StudentResults } from "./pages/Student";
+import { Courses, Results, ViewResults } from "./pages/Admin";
 
 // Main parent component
 export default function App() {
@@ -27,9 +29,10 @@ export default function App() {
   const getUserDetails = async () => {
     try {
       setLoading(true);
-      const res =await axios.get(`${baseUrl}/users/profile`, {
+      const res = await axios.get(`${baseUrl}/users/profile`, {
               headers: { Authorization: `Bearer ${cookies.access_token}` },
             })
+      setCookies("user_id", res.data.data.user._id)
       setUserDetails(res.data.data.user);
     } catch (e) {
       if (e?.response?.status == 401) {
@@ -66,12 +69,22 @@ export default function App() {
             <Route path="/" element={<Home userDetails={userDetails} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+
+            {/* Student */}
+            <Route path="/course/reg" element={<RegisterCourse/>} />
+            <Route path="/results" element={<StudentResults/>} />
+
+            {/* Admin */}
+            <Route path="/admin/courses" element={<Courses />} />
+            <Route path="/admin/results" element={<Results />} />
+            <Route path="/admin/results/:studentId" element={<ViewResults/>} />
+            {/* <Route path="/admin/students" element={<Students />} /> */}
           </Routes>
         </Router>
       ) : (
         <Loader />
       )}
-      <ToastContainer position="bottom-center" />
+      <ToastContainer position="top-right" />
       {/* <Footer/> */}
     </div>
   );

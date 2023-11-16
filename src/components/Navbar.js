@@ -38,7 +38,23 @@ const Navbar = ({userDetails, userId, cookies, role, setCookies, setUserDetails}
         
         <div className='block sm:hidden'>|</div>
         {cookies.access_token? (
-           <div className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' onClick={logout}>Logout</div>
+          <>
+          {role == 'student' && (
+            <>
+              <Link className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/course/reg">Course Reg</Link>
+              <Link className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/results">Results</Link>
+            </>
+          )}
+
+          {role == 'admin' && (
+            <>
+              <Link className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/admin/courses">Courses</Link>
+              <Link className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/admin/results">Results</Link>
+              {/* <Link className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/admin/students">Students</Link> */}
+            </>
+          )}
+            <div className='cursor-pointer sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' onClick={logout}>Logout</div>
+          </>
         ) : (
           <>
             <Link className='sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/login">Log in</Link>

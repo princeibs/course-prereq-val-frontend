@@ -10,7 +10,7 @@ const Home = ({userDetails}) => {
       {/* <div className={`rounded-lg w-[40%]  sm:border-0 mt-8 ${role == 2 ? 'border bg-primary-100' : ''} sm:bg-primary-50 flex flex-col justify-center items-center  sm:w-[90%] sm:mx-auto`}> */}
         {cookies.access_token? (
           <>
-          <div>Hello World</div>
+          <div className='text-4xl'>Course Registration Prerequisite Validation System</div>
           </>
         ) : (
           <>

@@ -8,13 +8,8 @@ const RegisterCourse = () => {
   const [loading, setLoading] = useState(false);
   const [cookies, setCookies] = useCookies();
   const [courses, setCourses] = useState([]);
+  const [registeredCoursesList, setRegisteredCoursesList] = useState([]);
   const [registeredCourses, setRegisteredCourses] = useState([]);
-
-  const [code, setCode] = useState("");
-  const [title, setTitle] = useState("");
-  const [creditUnits, setCreditUnits] = useState(0);
-  const [status, setStatus] = useState("core");
-  const [prerequisite, setPrerequisite] = useState("");
 
   function splitCourseCode(str) {
     if (!str) return;
@@ -60,8 +55,9 @@ const RegisterCourse = () => {
       );
       if (res.data.statusCode === 200) {
         const courses = res.data?.data.courses;
-        const regCourses = courses.map((course) => course.course_id);
-        setRegisteredCourses(regCourses);
+        setRegisteredCourses(courses);
+        const regCourses = courses.map((course) => course.course_id._id);
+        setRegisteredCoursesList(regCourses);
       } else {
         toast.error("Failed to load courses");
         toast.error(res.data?.message);
@@ -86,7 +82,7 @@ const RegisterCourse = () => {
       if (res.data.statusCode === 201) {
         toast.success("Registered course successfully");
         await loadCourses();
-        await loadRegisteredCourses()
+        await loadRegisteredCourses();
       } else {
         if (res.data?.message) {
           toast.error(res.data?.message);
@@ -108,9 +104,76 @@ const RegisterCourse = () => {
 
   return (
     <div className="w-full flex items-center flex-col mb-12">
+
+      {/* Registered Courses */}
+      <div className="w-[700px] mt-12">
+        <p className="text-2xl mb-4 text-center">Registered Courses</p>
+        <div class="relative overflow-x-auto sm:rounded-lg">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Course Code
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Course Title
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Credit Unit
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
+                </th>
+                {/* <th scope="col" class="px-6 py-3">
+                  Prerequisite
+                </th> */}
+                {/* <th scope="col" class="px-6 py-3">
+                  Action
+                </th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {registeredCourses?.map((course) => (
+                <tr class="bg-white border-b hover:bg-gray-100">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    {splitCourseCode(course.course_id.code)}
+                  </th>
+                  <td class="px-6 py-4">{course.course_id.title}</td>
+                  <td class="px-6 py-4">{course.course_id.credit_units}</td>
+                  <td class="px-6 py-4">{course.course_id.status}</td>
+                  {/* <td class="px-6 py-4">
+                    {splitCourseCode(course?.prerequisite?.code)}
+                  </td> */}
+                  {/* <td class="px-6 py-4">
+                    {registeredCoursesList.includes(course._id) ? (
+                      <button
+                        className="px-5 py-3 rounded-2xl font-bold bg-gray-200 text-white"
+                        disabled={true}
+                      >
+                        Registered
+                      </button>
+                    ) : (
+                      <button
+                        className="px-5 py-3 rounded-2xl font-bold bg-gray-900 text-white"
+                        onClick={(e) => registerCourse(e, course._id)}
+                      >
+                        Register
+                      </button>
+                    )}
+                  </td> */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* List Courses */}
       <div className="w-[700px] mt-12">
-        <p className="text-2xl mb-4 text-center">Courses</p>
+        <p className="text-2xl mb-4 text-center">Course Registration</p>
         <div class="relative overflow-x-auto sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -151,12 +214,12 @@ const RegisterCourse = () => {
                     {splitCourseCode(course?.prerequisite?.code)}
                   </td>
                   <td class="px-6 py-4">
-                    {registeredCourses.includes(course._id) ? (
+                    {registeredCoursesList.includes(course._id) ? (
                       <button
                         className="px-5 py-3 rounded-2xl font-bold bg-gray-200 text-white"
                         disabled={true}
                       >
-                        Register
+                        Registered
                       </button>
                     ) : (
                       <button

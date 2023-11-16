@@ -70,8 +70,8 @@ const Courses = () => {
           headers: { Authorization: `Bearer ${cookies.access_token}` },
         }
       )
-      if (res.data.statusCode === 201) {
-        toast.success('Added new course successfully')
+      if (res.data.statusCode === 201 || res.data.statusCode === 200) {
+        toast.success(res.data?.message)
         await loadCourses()
       } else {
         toast.error('Failed to add course')
@@ -93,7 +93,7 @@ const Courses = () => {
 
       {/* Add Course */}
       <div className='w-[500px]'>
-        <p className='text-2xl mb-4 text-center'>Add Course</p>
+        <p className='text-2xl mb-4 text-center'>Add (or Update) Course</p>
         <form onSubmit={handleSubmit}>
           <div class="mb-6">
             <label for="ccode" class="block mb-2 text-sm font-medium text-gray-900">Course Code</label>
@@ -137,7 +137,7 @@ const Courses = () => {
               </>
             ) : (<div>No prerequisite course found</div>)}
         
-          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>
       </div>
 

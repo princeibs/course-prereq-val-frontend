@@ -219,7 +219,7 @@ const Results = () => {
       
       {/* Add Course */}
       <div className="w-[500px] mb-20">
-        <p className="text-2xl mb-4 text-center">Add Result</p>
+        <p className="text-2xl mb-4 text-center">Add (or Update) Result</p>
         <form onSubmit={handleSubmit}>
           {/* Student */}
           <div class="mb-6">

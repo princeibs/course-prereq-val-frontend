@@ -25,7 +25,8 @@ const Login = () => {
                 setCookies("access_token", res.data.data.token);
                 setCookies('role', res.data.data.role)
                 toast.success("Login successful");
-                navigate("/");
+                if (res.data.data?.role == 'admin') navigate("/admin/courses");
+                if (res.data.data?.role == 'student') navigate("/course/reg");
             } else {
                 toast.error("Failed to log in")
                 toast.error(res.data?.message)

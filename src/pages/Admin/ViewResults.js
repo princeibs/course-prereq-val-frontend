@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 import { baseUrl } from "../../helpers/config";
 
 const ViewResults = () => {
@@ -137,7 +138,7 @@ const ViewResults = () => {
                       ?.filter((result) =>
                         splitCourseCode(result.course_id.code)
                           .split(" ")[1]
-                          .startsWith(1)
+                          ?.startsWith(1)
                       )
                       .map((result, index) => (
                         <tr class="bg-white border-b hover:bg-gray-100">
@@ -184,7 +185,7 @@ const ViewResults = () => {
                       ?.filter((result) =>
                         splitCourseCode(result.course_id.code)
                           .split(" ")[1]
-                          .startsWith(2)
+                          ?.startsWith(2)
                       )
                       .map((result, index) => (
                         <tr class="bg-white border-b hover:bg-gray-100">
@@ -231,7 +232,7 @@ const ViewResults = () => {
                       ?.filter((result) =>
                         splitCourseCode(result.course_id.code)
                           .split(" ")[1]
-                          .startsWith(3)
+                          ?.startsWith(3)
                       )
                       .map((result, index) => (
                         <tr class="bg-white border-b hover:bg-gray-100">
@@ -278,7 +279,7 @@ const ViewResults = () => {
                       ?.filter((result) =>
                         splitCourseCode(result.course_id.code)
                           .split(" ")[1]
-                          .startsWith(4)
+                          ?.startsWith(4)
                       )
                       .map((result, index) => (
                         <tr class="bg-white border-b hover:bg-gray-100">
@@ -306,7 +307,7 @@ const ViewResults = () => {
           )}
         </>
       ) : (
-        <div>Loading...</div>
+        <Loader/>
       )}
     </div>
   );

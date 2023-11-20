@@ -28,7 +28,7 @@ const Navbar = ({userDetails, userId, cookies, role, setCookies, setUserDetails}
   }
 
   return (
-    <div className='flex flex-row items-center w-full px-[20px] py-[30px] mb-4 bg-green-500 sm:flex-col sm:items-start sm:p-3'>
+    <div className='flex flex-row items-center w-full px-[20px] py-[30px] mb-4 bg-gray-700 text-white sm:flex-col sm:items-start sm:p-3'>
       <div id='logo-text' className='text-2xl sm:text-2xl sm:font-semibold sm:mx-auto'>Course Registration Prerequisite Validator</div>
       <div className='font-bold flex flex-row justify-around items-center w-[700px] h-[50px] rounded-[10px] ml-[6rem] no-underline sm:m-0 sm:w-full sm:border-0 sm:flex-wrap sm:h-auto sm:items-start sm:mt-4 sm:gap-1'>  
         <Link className='sm:rounded-md sm:px-6 sm:py-2 drop-shadow-[0] sm:drop-shadow' to="/">Home</Link>

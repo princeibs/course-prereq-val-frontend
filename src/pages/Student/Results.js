@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 import { baseUrl } from "../../helpers/config";
 
 const StudentResults = () => {
@@ -51,9 +52,12 @@ const StudentResults = () => {
   const loadResults = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${baseUrl}/result/${cookies.user_id}/records`, {
-        headers: { Authorization: `Bearer ${cookies.access_token}` },
-      });
+      const res = await axios.get(
+        `${baseUrl}/result/${cookies.user_id}/records`,
+        {
+          headers: { Authorization: `Bearer ${cookies.access_token}` },
+        }
+      );
       if (res.data.statusCode === 200) {
         setResults(res.data?.data.results);
       } else {
@@ -305,7 +309,7 @@ const StudentResults = () => {
           )}
         </>
       ) : (
-        <div>Loading...</div>
+        <Loader />
       )}
     </div>
   );
